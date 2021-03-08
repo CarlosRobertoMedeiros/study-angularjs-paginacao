@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+	<head >
+		<title>{{dc.titulo}} </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	</head>
+	
+	<body ng-controller="listarDadosCtrl as dc" ng-init="dc.init()">
+		<div class="container">
+            <div class="col-md-12" >
+                <h3>{{dc.titulo}}</h3>
+                
+				<form class="form-inline">
+				    <div class="form-group">
+				        <label>Procurar</label>
+				        <input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
+				    </div>
+				</form>
+				<hr/>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-click="dc.ordenar('id')">ID</th>
+                            <th ng-click="dc.ordenar('nome')">Nome</th>
+                            <th ng-click="dc.ordenar('email')">E-mail</th>
+                            <th ng-click="dc.ordenar('telefone')">Telefone</th>
+                            <th ng-click="dc.ordenar('empresa')">Empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="dado in dc.dados | filter:procurar |orderBy:dc.sortKey:dc.reverse |itemsPerPage:5">
+				            <td>{{dado.id}}</td>
+				            <td>{{dado.nome}}</td>
+				            <td>{{dado.email}}</td>
+				            <td>{{dado.telefone}}</td>
+				            <td>{{dado.empresa}}</td>
+				        </tr>
+                    </tbody>
+                </table>
+                <dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+
+            </div>
+        </div>
+ 		
+ 		<!--libs -->
+		<script src="bower_components/jQuery/dist/jquery.slim.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/controller/listarDadosCtrl.js"></script>
+		<script type="text/javascript" src="js/service/listarDadosService.js"></script>
+		<script type="text/javascript" src="js/directive/dirPagination.js"></script>
+		
+
+	</body>
+</html>
